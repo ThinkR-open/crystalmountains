@@ -1,0 +1,54 @@
+#' %%MODULE%% UI Function
+#'
+#' @description A shiny Module.
+#'
+#' @param id,input,output,session Internal parameters for {shiny}.
+#'
+#' @noRd
+#'
+#' @importFrom shiny NS tagList
+mod_%%MODULE%%_ui <- function(id){
+  ns <- NS(id)
+  tagList(
+    tags$div(
+      class = "left",
+      align = "center",
+      h2("All time download"),
+      uiOutput(ns("n")),
+      tags$blockquote("(RStudio's CRAN mirror)")
+    ),
+    tags$div(
+      class = "right",
+      align = "center",
+      h2("GitHub Stars"),
+      tags$div(id = "github")
+    )
+  )
+}
+
+#' %%MODULE%% Server Functions
+#'
+#' @noRd
+mod_%%MODULE%%_server <- function(id){
+  moduleServer( id, function(input, output, session){
+    ns <- session$ns
+
+    output$n <- renderUI({
+      golem::invoke_js("alert", "Welcome! This app displays the number of downloads from RStudio CRAN mirror and the number of stars on GitHub for the {golem} package.")
+      res <- get_golem_logs()
+
+      h3(
+        class = "number",
+        pretty_num(sum(res$count))
+      )
+
+    })
+
+  })
+}
+
+## To be copied in the UI
+# mod_%%MODULE%%_ui("%%MODULE%%_ui_1")
+
+## To be copied in the server
+# mod_%%MODULE%%_server("%%MODULE%%_ui_1")
