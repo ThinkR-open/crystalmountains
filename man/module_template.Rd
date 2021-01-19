@@ -9,9 +9,6 @@ module_template(name, path, ...)
 \arguments{
 \item{name, path, ...}{Arg passed from golem::add_module}
 }
-\value{
-
-}
 \description{
 This template will add a module skeleton.
 }

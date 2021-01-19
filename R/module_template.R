@@ -4,7 +4,6 @@
 #'
 #' @param name,path,... Arg passed from golem::add_module
 #'
-#' @return
 #' @export
 #'
 #' @examples
